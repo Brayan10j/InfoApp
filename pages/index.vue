@@ -13,9 +13,7 @@
             hide-details
           ></v-text-field>
           <v-spacer></v-spacer>
-          <v-btn>
-            REFRESH
-          </v-btn>
+          <v-btn @click="info()"> REFRESH </v-btn>
         </v-card-title>
         <v-data-table
           :headers="headersPairs"
@@ -60,6 +58,8 @@
             single-line
             hide-details
           ></v-text-field>
+          <v-spacer></v-spacer>
+          <v-btn @click="info()"> REFRESH </v-btn>
         </v-card-title>
         <v-data-table
           dense
@@ -67,6 +67,9 @@
           :items="listCoins"
           :search="search2"
         >
+          <template v-slot:[`item.image`]="{ item }">
+            <v-img :src="item.image" width="20"> </v-img>
+          </template>
           <template
             v-slot:[`item.price_change_percentage_1h_in_currency`]="{ item }"
           >
@@ -113,6 +116,7 @@ export default {
         { text: "INFORMATION", value: "info", align: "center" },
       ],
       headersCoins: [
+        { text: "", value: "image", align: "center" },
         {
           text: "NAME",
           align: "center",
@@ -120,10 +124,26 @@ export default {
         },
         { text: "MARKETCAP (USD)", value: "market_cap", align: "center" },
         { text: "PRICE (USD) ", value: "current_price", align: "center" },
-        { text: "% 1h", value: "price_change_percentage_1h_in_currency", align: "center" },
-        { text: "% 24h", value: "price_change_percentage_24h_in_currency", align: "center" },
-        { text: "% 7d", value: "price_change_percentage_7d_in_currency", align: "center" },
-        { text: "% 30d", value: "price_change_percentage_30d_in_currency", align: "center" },
+        {
+          text: "% 1h",
+          value: "price_change_percentage_1h_in_currency",
+          align: "center",
+        },
+        {
+          text: "% 24h",
+          value: "price_change_percentage_24h_in_currency",
+          align: "center",
+        },
+        {
+          text: "% 7d",
+          value: "price_change_percentage_7d_in_currency",
+          align: "center",
+        },
+        {
+          text: "% 30d",
+          value: "price_change_percentage_30d_in_currency",
+          align: "center",
+        },
       ],
       desserts: [],
       listCoins: [],
