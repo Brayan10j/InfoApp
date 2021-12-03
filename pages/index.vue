@@ -12,6 +12,10 @@
             single-line
             hide-details
           ></v-text-field>
+          <v-spacer></v-spacer>
+          <v-btn>
+            REFRESH
+          </v-btn>
         </v-card-title>
         <v-data-table
           :headers="headersPairs"
@@ -47,7 +51,7 @@
     <v-col>
       <v-card>
         <v-card-title>
-          Coins
+          Coins Binance Smart Chain
           <v-spacer></v-spacer>
           <v-text-field
             v-model="search2"
