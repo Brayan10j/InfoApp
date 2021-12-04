@@ -73,22 +73,60 @@
           <template
             v-slot:[`item.price_change_percentage_1h_in_currency`]="{ item }"
           >
-            {{ item.price_change_percentage_1h_in_currency.toFixed(2) }} %
+            <span
+              :style="`color: ${
+                item.price_change_percentage_1h_in_currency > 0
+                  ? 'green'
+                  : 'red'
+              }`"
+            >
+              {{ item.price_change_percentage_1h_in_currency.toFixed(2) }} %
+            </span>
           </template>
           <template
             v-slot:[`item.price_change_percentage_24h_in_currency`]="{ item }"
           >
-            {{ item.price_change_percentage_24h_in_currency.toFixed(2) }} %
+            <span
+              :style="`color: ${
+                item.price_change_percentage_24h_in_currency > 0
+                  ? 'green'
+                  : 'red'
+              }`"
+              >{{
+                item.price_change_percentage_24h_in_currency.toFixed(2)
+              }}
+              %</span
+            >
           </template>
           <template
             v-slot:[`item.price_change_percentage_7d_in_currency`]="{ item }"
           >
-            {{ item.price_change_percentage_7d_in_currency.toFixed(2) }} %
+            <span
+              :style="`color: ${
+                item.price_change_percentage_7d_in_currency > 0
+                  ? 'green'
+                  : 'red'
+              }`"
+              >{{
+                item.price_change_percentage_24h_in_currency.toFixed(2)
+              }}
+              %</span
+            >
           </template>
           <template
             v-slot:[`item.price_change_percentage_30d_in_currency`]="{ item }"
           >
-            {{ item.price_change_percentage_30d_in_currency.toFixed(2) }} %
+            <span
+              :style="`color: ${
+                item.price_change_percentage_30d_in_currency > 0
+                  ? 'green'
+                  : 'red'
+              }`"
+              >{{
+                item.price_change_percentage_30d_in_currency.toFixed(2)
+              }}
+              %</span
+            >
           </template>
         </v-data-table>
       </v-card>
