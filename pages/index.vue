@@ -87,16 +87,22 @@
               {{ parseFloat(item.reserveUSD).toFixed(2) }} USD
             </template>
             <template v-slot:[`item.reserve0`]="{ item }">
-              {{ parseFloat(item.reserve0).toFixed(2) }} {{item.token0.symbol}}
+              {{ parseFloat(item.reserve0).toFixed(2) }}
+              {{ item.token0.symbol }}
             </template>
             <template v-slot:[`item.reserve1`]="{ item }">
-              {{ parseFloat(item.reserve1).toFixed(2) }}  {{item.token1.symbol}}
+              {{ parseFloat(item.reserve1).toFixed(2) }}
+              {{ item.token1.symbol }}
             </template>
             <template v-slot:[`item.totalSupply`]="{ item }">
               {{ parseFloat(item.totalSupply).toFixed(2) }} LPs
             </template>
             <template v-slot:[`item.date`]="{ item }">
-              {{ item.timestamp }}
+              {{
+                new Date(Math.floor(item.timestamp * 1000.0))
+                  .toISOString()
+                  .substr(0, 10)
+              }}
             </template>
             <template v-slot:[`item.info`]="{ item }">
               <v-btn
@@ -266,7 +272,7 @@ export default {
       max: 50000,
       tx: 10,
       time: 0,
-      lastTx: 0
+      lastTx: 0,
     };
   },
   methods: {
@@ -290,8 +296,8 @@ export default {
         this.overlay = true;
         let myDate = this.date.split("-");
         var newDate = new Date(myDate[0], myDate[1] - 1, myDate[2]);
-        let dateOnaDayAgo = new Date(Date.now())
-        dateOnaDayAgo.setDate(dateOnaDayAgo.getDate() -1)
+        let dateOnaDayAgo = new Date(Date.now());
+        dateOnaDayAgo.setDate(dateOnaDayAgo.getDate() - 1);
         this.time = Math.floor(newDate.getTime() / 1000.0);
         this.lastTx = Math.floor(dateOnaDayAgo / 1000.0);
         var { data } = await this.$axios({
@@ -329,13 +335,12 @@ export default {
               max: this.max,
               tx: this.tx,
               time: this.time,
-              lastTx: this.lastTx
+              lastTx: this.lastTx,
             },
           },
         });
-        console.log((data.data.pairs).length)
-        this.listPairs = (data.data.pairs).filter(p => (p.swaps).length != 0)
-        console.log(this.listPairs.length)
+
+        this.listPairs = data.data.pairs.filter((p) => p.swaps.length != 0);
         this.overlay = false;
       } catch (error) {
         alert("error in query try again");
